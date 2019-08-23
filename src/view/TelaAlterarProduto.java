@@ -34,8 +34,6 @@ public class TelaAlterarProduto extends javax.swing.JFrame {
         catch(Exception ex){
             
         }
-            
-        
         
     }
 

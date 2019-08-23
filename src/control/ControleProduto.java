@@ -123,8 +123,7 @@ public class ControleProduto {
 
     public Produto calcularQuantidade(int quantidade, Produto p) {
 
-        if (p.getQuantidade() < quantidade) {
-            JOptionPane.showMessageDialog(null, "Venda não permitida", "Erro", JOptionPane.ERROR_MESSAGE);
+        if (p.getQuantidade() < quantidade || quantidade == 0) {
             return null;
         } else {
             p.setQuantidade(p.getQuantidade() - quantidade);

@@ -102,8 +102,7 @@ public class TelaBuscarProduto extends javax.swing.JFrame {
 
         try {
             if (cp.buscarProduto(jTFNome.getText()) == null) {
-                JOptionPane.showMessageDialog(null,"Produto nao encontrado");
-                
+                JOptionPane.showMessageDialog(null,"Produto nao encontrado");    
             } else {
                 TelaAlterarProduto tap = new TelaAlterarProduto((cp.buscarProduto(jTFNome.getText())));
                 tap.setVisible(true);

@@ -156,16 +156,13 @@ public class TelaNovoProduto extends javax.swing.JFrame {
         
         try{
             cp.cadastrarProduto(jTFNome.getText(), Integer.parseInt(jTFQuantidade.getText()), Double.parseDouble(jTFValor.getText()),(String) jComboBox1.getSelectedItem());
-            
+            jTFNome.setText(null);
+            jTFQuantidade.setText(null);
+            jTFValor.setText(null);
+            jComboBox1.setSelectedItem("Janeiro");
         }catch(Exception e){
             JOptionPane.showMessageDialog(null,"Erro no cadastro");
         }
-        
-        jTFNome.setText(null);
-        jTFQuantidade.setText(null);
-        jTFValor.setText(null);
-        jComboBox1.setSelectedItem("Janeiro");
-        
        
     }//GEN-LAST:event_jBCadastrarActionPerformed
 
