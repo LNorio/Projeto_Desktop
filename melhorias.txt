@@ -1,0 +1,21 @@
+MELHORIA
+-------------------------------
+LISTA E PRODUTOS PARA ALTERACAO - Perfectiva
+CONTROLE DE MULTI-TELAS - Perfectiva
+NA TELA DE ALTERAR PRODUTO E VENDER PODERIA APARECER UMA LISTAGEM DE PRODUTOS - Perfectiva
+CONTROLE DE VENDEDORES - Perfectiva
+Todas as janelas sao fechadas quando pressionado o botao close - Perfectiva
+Melhorias no design - Perfectiva
+Aperfeicoar Mensagens de Erro - Perfectiva
+Prioridade em somente uma tela- Perfectiva
+
+ERROS
+-------------------------
+AO FECHAR O RELATORIO O PROGRAMA EH FECHADO - Corretiva
+AO VENDER UMA QUANTIDADE 0 DE PRODUTO EH GERADO UMA MENSAGEM DE `VENDIDO COM SUCESSO` - Corretiva
+CONTROLE DE INPUT - Preventiva
+AO ALTERAR UM PRODUTO O NOVO PRODUTO NAO FICA SALVO NO RELATORIO - Corretiva
+Todos os campos sao apagados apos dar um erro no cadastro - Preventiva
+Erro na arquitetura na view de AlterarProduto - Preventiva
+Erro na arquitetura em ControleProduto - Preventiva
+Erro ao trocar o nome de um produto cadastrado - Corretiva
