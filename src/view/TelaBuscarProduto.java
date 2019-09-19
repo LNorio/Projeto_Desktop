@@ -36,7 +36,12 @@ public class TelaBuscarProduto extends javax.swing.JFrame {
         jBBuscar = new javax.swing.JButton();
         jBVoltar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel1.setText("Alterar Produto");
 
@@ -94,6 +99,7 @@ public class TelaBuscarProduto extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
@@ -105,6 +111,7 @@ public class TelaBuscarProduto extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null,"Produto nao encontrado");    
             } else {
                 TelaAlterarProduto tap = new TelaAlterarProduto((cp.buscarProduto(jTFNome.getText())));
+                this.setVisible(false);
                 tap.setVisible(true);
             }
         } catch (Exception ex) {
@@ -115,7 +122,14 @@ public class TelaBuscarProduto extends javax.swing.JFrame {
 
     private void jBVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVoltarActionPerformed
         this.dispose();
+        TelaMenu tela = new TelaMenu();
+        tela.setVisible(true);
     }//GEN-LAST:event_jBVoltarActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        TelaMenu tela = new TelaMenu();
+        tela.setVisible(true);
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

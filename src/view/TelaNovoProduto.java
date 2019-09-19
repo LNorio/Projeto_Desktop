@@ -6,6 +6,7 @@
 package view;
 
 import control.ControleProduto;
+import control.ProdException;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
@@ -27,6 +28,7 @@ public class TelaNovoProduto extends javax.swing.JFrame {
      */
     public TelaNovoProduto() {
         initComponents();
+        this.setFocusableWindowState(true);
     }
 
     /**
@@ -50,7 +52,13 @@ public class TelaNovoProduto extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setAlwaysOnTop(true);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel1.setText("Cadastrar Produto");
 
@@ -149,21 +157,25 @@ public class TelaNovoProduto extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarActionPerformed
         ControleProduto cp = new ControleProduto();
         
-        try{
-            cp.cadastrarProduto(jTFNome.getText(), Integer.parseInt(jTFQuantidade.getText()), Double.parseDouble(jTFValor.getText()),(String) jComboBox1.getSelectedItem());
-            jTFNome.setText(null);
-            jTFQuantidade.setText(null);
-            jTFValor.setText(null);
-            jComboBox1.setSelectedItem("Janeiro");
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null,"Erro no cadastro");
+        if(jTFNome.getText().equals("") || jTFQuantidade.getText().equals("") || jTFValor.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos", "Erro", JOptionPane.ERROR_MESSAGE);
+        }else{
+            try{
+                cp.cadastrarProduto(jTFNome.getText(), Integer.parseInt(jTFQuantidade.getText()), Double.parseDouble(jTFValor.getText()),(String) jComboBox1.getSelectedItem());
+                jTFNome.setText(null);
+                jTFQuantidade.setText(null);
+                jTFValor.setText(null);
+                jComboBox1.setSelectedItem("Janeiro");
+            }catch(ProdException e){
+                JOptionPane.showMessageDialog(null, e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            }
         }
-       
     }//GEN-LAST:event_jBCadastrarActionPerformed
 
     private void jTFNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFNomeActionPerformed
@@ -172,7 +184,14 @@ public class TelaNovoProduto extends javax.swing.JFrame {
 
     private void jBVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVoltarActionPerformed
         this.dispose();
+        TelaMenu tela = new TelaMenu();
+        tela.setVisible(true);
     }//GEN-LAST:event_jBVoltarActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        TelaMenu tela = new TelaMenu();
+        tela.setVisible(true);
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

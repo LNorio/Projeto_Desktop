@@ -5,12 +5,9 @@
         <group>
             <file>file:/C:/Users/Admin/Desktop/Faculdade/Desktop/ProjetoDesktopBD/src/view/TelaAlterarProduto.java</file>
             <file>file:/C:/Users/Admin/Desktop/Faculdade/Desktop/ProjetoDesktopBD/src/view/TelaMenu.java</file>
-            <file>file:/C:/Users/Admin/Desktop/Faculdade/Desktop/ProjetoDesktopBD/src/view/TelaNovoProduto.java</file>
             <file>file:/C:/Users/Admin/Desktop/Faculdade/Desktop/ProjetoDesktopBD/src/relatorio/ProdutoEmEstoque.jrxml</file>
+            <file>file:/C:/Users/Admin/Desktop/Faculdade/Desktop/ProjetoDesktopBD/src/view/TelaExcluirProduto.java</file>
             <file>file:/C:/Users/Admin/Desktop/Faculdade/Desktop/ProjetoDesktopBD/src/view/TelaBuscarProduto.java</file>
-            <file>file:/C:/Users/Admin/Desktop/Faculdade/Desktop/ProjetoDesktopBD/src/model/Produto.java</file>
-            <file>file:/C:/Users/Admin/Desktop/Faculdade/Desktop/ProjetoDesktopBD/src/view/TelaVenderProduto.java</file>
-            <file>file:/C:/Users/Admin/Desktop/Faculdade/Desktop/ProjetoDesktopBD/src/view/TelaRelatorios.java</file>
             <file>file:/C:/Users/Admin/Desktop/Faculdade/Desktop/ProjetoDesktopBD/src/control/ControleProduto.java</file>
         </group>
     </open-files>

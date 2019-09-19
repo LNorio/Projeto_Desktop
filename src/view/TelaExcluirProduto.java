@@ -42,7 +42,12 @@ public class TelaExcluirProduto extends javax.swing.JFrame {
         jBExcluir = new javax.swing.JButton();
         jBVoltar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel1.setText("Excluir Produto");
 
@@ -105,6 +110,7 @@ public class TelaExcluirProduto extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExcluirActionPerformed
@@ -114,7 +120,7 @@ public class TelaExcluirProduto extends javax.swing.JFrame {
             cp.excluirProduto(jTFNome.getText());
         }
         catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Erro no cadastro");
+            JOptionPane.showMessageDialog(null,"Erro ao Excluir");
         }
     }//GEN-LAST:event_jBExcluirActionPerformed
 
@@ -124,7 +130,14 @@ public class TelaExcluirProduto extends javax.swing.JFrame {
 
     private void jBVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVoltarActionPerformed
         this.dispose();
+        TelaMenu tela = new TelaMenu();
+        tela.setVisible(true);
     }//GEN-LAST:event_jBVoltarActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        TelaMenu tela = new TelaMenu();
+        tela.setVisible(true);
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

@@ -140,26 +140,31 @@ public class TelaMenu extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBNovoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBNovoProdutoActionPerformed
         TelaNovoProduto tnp = new TelaNovoProduto();
         tnp.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jBNovoProdutoActionPerformed
 
     private void jBVenderProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVenderProdutoActionPerformed
         TelaVenderProduto tvp = new TelaVenderProduto();
         tvp.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jBVenderProdutoActionPerformed
 
     private void jBExcluirProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExcluirProdutoActionPerformed
         TelaExcluirProduto tep = new TelaExcluirProduto();
         tep.setVisible(true);
+        this.setEnabled(false);
     }//GEN-LAST:event_jBExcluirProdutoActionPerformed
 
     private void jBAlterarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAlterarProdutoActionPerformed
         TelaBuscarProduto tbp = new TelaBuscarProduto();
         tbp.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jBAlterarProdutoActionPerformed
 
     private void jBSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSairActionPerformed
@@ -171,6 +176,7 @@ public class TelaMenu extends javax.swing.JFrame {
     private void jBRelatoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRelatoriosActionPerformed
         TelaRelatorios r = new TelaRelatorios();
         r.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jBRelatoriosActionPerformed
 
     /**

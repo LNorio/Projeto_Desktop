@@ -69,7 +69,7 @@ public class ControleProduto {
         }
     }
 
-    public void cadastrarProduto(String nome, int quantidade, double preco, String validade) throws Exception {
+    public void cadastrarProduto(String nome, int quantidade, double preco, String validade) throws ProdException {
 
         int resp = 0;
         try {
@@ -78,16 +78,18 @@ public class ControleProduto {
             pstdados = connection.prepareStatement(sql);
 
             pstdados.setString(1, nome);
-            if (quantidade <= 0 || preco <= 0) {
-                throw new Exception();
-            } else {
+            if (quantidade <= 0) { 
+                throw new ProdException("Quantidade menor igual a 0");
+            }else if(preco <= 0){
+                throw new ProdException("Preco menor igual a 0");
+            }else {
                 pstdados.setInt(2, quantidade);
                 pstdados.setDouble(3, preco);
             }
             pstdados.setString(4, validade);
             resp = pstdados.executeUpdate();
         } catch (SQLException ex) {
-            System.out.println("Erro Executa Update = " + ex);
+            throw new ProdException("Nome ja existente");
         }
 
         if (resp > 0) {
@@ -123,7 +125,7 @@ public class ControleProduto {
 
     public Produto calcularQuantidade(int quantidade, Produto p) {
 
-        if (p.getQuantidade() < quantidade || quantidade == 0) {
+        if (p.getQuantidade() < quantidade || quantidade == 0) { // quantidade menor ou igual a 0
             return null;
         } else {
             p.setQuantidade(p.getQuantidade() - quantidade);

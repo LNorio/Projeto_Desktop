@@ -58,7 +58,15 @@ public class TelaAlterarProduto extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel1.setText("Alterar Produto");
 
@@ -158,6 +166,7 @@ public class TelaAlterarProduto extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTFNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFNomeActionPerformed
@@ -168,6 +177,8 @@ public class TelaAlterarProduto extends javax.swing.JFrame {
 
     private void jBVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVoltarActionPerformed
         this.dispose();
+        TelaMenu tela = new TelaMenu();
+        tela.setVisible(true);
     }//GEN-LAST:event_jBVoltarActionPerformed
 
     private void jBAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAlterarActionPerformed
@@ -184,6 +195,15 @@ public class TelaAlterarProduto extends javax.swing.JFrame {
     private void jTFQuantidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFQuantidadeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTFQuantidadeActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+
+    }//GEN-LAST:event_formWindowClosed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        TelaMenu tela = new TelaMenu();
+        tela.setVisible(true);
+    }//GEN-LAST:event_formWindowClosing
     public boolean verificarCampos() {
         if (jTFNome.getText().equals("") || jTFQuantidade.getText().equals("") || jTFValor.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Não pode ter campos vazios", "Erro", JOptionPane.ERROR_MESSAGE);

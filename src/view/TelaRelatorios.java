@@ -34,7 +34,12 @@ public class TelaRelatorios extends javax.swing.JFrame {
         jBRelatorioPorVencimento = new javax.swing.JButton();
         jBVoltar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jBRelatorioEmEstoque.setText("Produtos em estoque");
         jBRelatorioEmEstoque.addActionListener(new java.awt.event.ActionListener() {
@@ -101,10 +106,13 @@ public class TelaRelatorios extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVoltarActionPerformed
         this.dispose();
+        TelaMenu tela = new TelaMenu();
+        tela.setVisible(true);
     }//GEN-LAST:event_jBVoltarActionPerformed
 
     private void jBRelatorioEmEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRelatorioEmEstoqueActionPerformed
@@ -121,6 +129,11 @@ public class TelaRelatorios extends javax.swing.JFrame {
         ControleProduto cp = new ControleProduto();
         cp.relatorioPorValidade();
     }//GEN-LAST:event_jBRelatorioPorVencimentoActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        TelaMenu tela = new TelaMenu();
+        tela.setVisible(true);
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
