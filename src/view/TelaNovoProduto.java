@@ -53,7 +53,6 @@ public class TelaNovoProduto extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setAlwaysOnTop(true);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -174,6 +173,8 @@ public class TelaNovoProduto extends javax.swing.JFrame {
                 jComboBox1.setSelectedItem("Janeiro");
             }catch(ProdException e){
                 JOptionPane.showMessageDialog(null, e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            }catch(Exception ex){
+                JOptionPane.showMessageDialog(null, "Quantidade ou valor com caracter errado");
             }
         }
     }//GEN-LAST:event_jBCadastrarActionPerformed
