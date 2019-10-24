@@ -6,6 +6,7 @@
 package view;
 
 import control.ControleProduto;
+import control.ValidacaoController;
 import javax.swing.JOptionPane;
 import model.Produto;
 
@@ -182,8 +183,9 @@ public class TelaAlterarProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_jBVoltarActionPerformed
 
     private void jBAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAlterarActionPerformed
+        ValidacaoController vc = new ValidacaoController();
         ControleProduto cp = new ControleProduto();
-        if (verificarCampos()) {
+        if (vc.verificarCampos(jTFNome.getText(), jTFQuantidade.getText(), jTFValor.getText())) {
             try {
                 cp.alterarProduto(jTFNome.getText(), Integer.parseInt(jTFQuantidade.getText()), Double.parseDouble(jTFValor.getText()),(String) jComboBox1.getSelectedItem());
             } catch (Exception ex) {
@@ -204,14 +206,6 @@ public class TelaAlterarProduto extends javax.swing.JFrame {
         TelaMenu tela = new TelaMenu();
         tela.setVisible(true);
     }//GEN-LAST:event_formWindowClosing
-    public boolean verificarCampos() {
-        if (jTFNome.getText().equals("") || jTFQuantidade.getText().equals("") || jTFValor.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Não pode ter campos vazios", "Erro", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-        return true;
-
-    }
     /**
      * @param args the command line arguments
      */

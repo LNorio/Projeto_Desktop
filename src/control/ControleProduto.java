@@ -6,22 +6,12 @@
 package control;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Produto;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -29,44 +19,16 @@ import net.sf.jasperreports.view.JasperViewer;
  */
 public class ControleProduto {
 
-    private Connection connection = null;
+    
     private PreparedStatement pstdados = null;
     private Statement stdados = null;
     private ResultSet rsdados = null;
-
-    public static final String pdfEmEstoque
-            = System.getProperty("user.dir") + "/src/relatorio/ProdutoEmEstoque.pdf";
-    public static final String pdfEmFalta
-            = System.getProperty("user.dir") + "/src/relatorio/ProdutoEmFalta.pdf";
-    public static final String pdfPorValidade
-            = System.getProperty("user.dir") + "/src/relatorio/ProdutosPorValidade.pdf";
-    public static final String relatorioEmEstoque
-            = System.getProperty("user.dir") + "/src/relatorio/ProdutoEmEstoque.jasper";
-    public static final String relatorioEmFalta
-            = System.getProperty("user.dir") + "/src/relatorio/ProdutoEmFalta.jasper";
-    public static final String relatorioPorValidade
-            = System.getProperty("user.dir") + "/src/relatorio/ProdutosPorValidade.jasper";
-
+    private BDController bd = null;
+    private Connection connection = null;
+    
     public ControleProduto() {
-        acessaBD();
-    }
-
-    public void acessaBD() {
-        String usuario = "leonardo";
-        String senha = "leonardo";
-        try {
-            Class.forName("org.postgresql.Driver");
-            String urlconexao = "jdbc:postgresql://localhost/ProjetoDesk";
-            connection = DriverManager.getConnection(urlconexao, usuario, senha);
-            //conn.setAutoCommit(false);
-            //JOptionPane.showMessageDialog(this, "Deu certo");
-
-        } catch (ClassNotFoundException ex) {
-            System.out.println("Erro " + ex);
-            JOptionPane.showMessageDialog(null, "Falha em se conectar ao postgre");
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Erro ao acessar o Banco");
-        }
+        bd = new BDController();
+        connection = bd.acessaBD();
     }
 
     public void cadastrarProduto(String nome, int quantidade, double preco, String validade) throws ProdException {
@@ -102,11 +64,12 @@ public class ControleProduto {
     public void venderProduto(String nome, int quantidade) {
 
         Produto p = buscarProduto(nome);
+        ValidacaoController vc = new ValidacaoController();
         if (p == null) {
             JOptionPane.showMessageDialog(null, " Produto nao encontrado");
         } else {
             try {
-                p = calcularQuantidade(quantidade, p);
+                p = vc.calcularQuantidade(quantidade, p);
                 quantidade = p.getQuantidade();
                 if (p != null) {
                     String sql = "UPDATE produto SET quantidade=?  WHERE nome = '" + nome + "'";
@@ -120,16 +83,6 @@ public class ControleProduto {
                 JOptionPane.showMessageDialog(null, "Erro ao vender produto", "Erro", JOptionPane.ERROR_MESSAGE);
                 System.out.println("" + ex);
             }
-        }
-    }
-
-    public Produto calcularQuantidade(int quantidade, Produto p) {
-
-        if (p.getQuantidade() < quantidade || quantidade == 0) { // quantidade menor ou igual a 0
-            return null;
-        } else {
-            p.setQuantidade(p.getQuantidade() - quantidade);
-            return p;
         }
     }
 
@@ -202,62 +155,6 @@ public class ControleProduto {
 
     }
 
-    public void sair() {
-        try {
-            connection.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao fechar conexao");
-        }
-    }
+    
 
-    public void relatorioEmEstoque() {
-        JasperPrint impressao;
-        acessaBD();
-        try {
-            impressao = JasperFillManager.fillReport(
-                    relatorioEmEstoque,
-                    null,
-                    connection);
-
-            JasperViewer.viewReport(impressao);
-            JasperExportManager.exportReportToPdfFile(impressao, pdfEmEstoque);
-        } catch (JRException ex) {
-            System.err.println("Nao foi possivel gerar o relatorio\n\n");
-            ex.printStackTrace();
-        }
-    }
-
-    public void relatorioEmFalta() {
-        JasperPrint impressao;
-        acessaBD();
-        try {
-            impressao = JasperFillManager.fillReport(
-                    relatorioEmFalta,
-                    null,
-                    connection);
-
-            JasperViewer.viewReport(impressao);
-            JasperExportManager.exportReportToPdfFile(impressao, pdfEmFalta);
-        } catch (JRException ex) {
-            System.err.println("Nao foi possivel gerar o relatorio\n\n");
-            ex.printStackTrace();
-        }
-    }
-
-    public void relatorioPorValidade() {
-        JasperPrint impressao;
-        acessaBD();
-        try {
-            impressao = JasperFillManager.fillReport(
-                    relatorioPorValidade,
-                    null,
-                    connection);
-
-            JasperViewer.viewReport(impressao);
-            JasperExportManager.exportReportToPdfFile(impressao, pdfPorValidade);
-        } catch (JRException ex) {
-            System.err.println("Nao foi possivel gerar o relatorio\n\n");
-            ex.printStackTrace();
-        }
-    }
 }

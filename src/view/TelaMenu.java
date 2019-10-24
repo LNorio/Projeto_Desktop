@@ -5,17 +5,8 @@
  */
 package view;
 
+import control.BDController;
 import control.ControleProduto;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-
 /**
  *
  * @author bayma
@@ -158,7 +149,7 @@ public class TelaMenu extends javax.swing.JFrame {
     private void jBExcluirProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExcluirProdutoActionPerformed
         TelaExcluirProduto tep = new TelaExcluirProduto();
         tep.setVisible(true);
-        this.setEnabled(false);
+        this.setVisible(false);
     }//GEN-LAST:event_jBExcluirProdutoActionPerformed
 
     private void jBAlterarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAlterarProdutoActionPerformed
@@ -169,7 +160,8 @@ public class TelaMenu extends javax.swing.JFrame {
 
     private void jBSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSairActionPerformed
         ControleProduto cp = new ControleProduto();
-        cp.sair();
+        BDController bd = new BDController();
+        bd.sair();
         System.exit(0);
     }//GEN-LAST:event_jBSairActionPerformed
 

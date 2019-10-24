@@ -5,7 +5,7 @@
  */
 package view;
 
-import control.ControleProduto;
+import control.RelatorioController;
 
 /**
  *
@@ -116,18 +116,18 @@ public class TelaRelatorios extends javax.swing.JFrame {
     }//GEN-LAST:event_jBVoltarActionPerformed
 
     private void jBRelatorioEmEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRelatorioEmEstoqueActionPerformed
-        ControleProduto cp = new ControleProduto();
-        cp.relatorioEmEstoque();
+        RelatorioController rc = new RelatorioController();
+        rc.relatorioEmEstoque();
     }//GEN-LAST:event_jBRelatorioEmEstoqueActionPerformed
 
     private void jBRelatorioEmFaltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRelatorioEmFaltaActionPerformed
-        ControleProduto cp = new ControleProduto();
-        cp.relatorioEmFalta();
+        RelatorioController rc = new RelatorioController();
+        rc.relatorioEmFalta();
     }//GEN-LAST:event_jBRelatorioEmFaltaActionPerformed
 
     private void jBRelatorioPorVencimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRelatorioPorVencimentoActionPerformed
-        ControleProduto cp = new ControleProduto();
-        cp.relatorioPorValidade();
+        RelatorioController rc = new RelatorioController();
+        rc.relatorioPorValidade();
     }//GEN-LAST:event_jBRelatorioPorVencimentoActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
