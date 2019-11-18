@@ -191,7 +191,8 @@ public class TelaAlterarProduto extends javax.swing.JFrame {
         int resp = 0;
         if (vc.verificarCampos(jTFNome.getText(), jTFQuantidade.getText(), jTFValor.getText())) {
             try {
-                resp = cp.cadastrarProduto(jTFNome.getText(), Integer.parseInt(jTFQuantidade.getText()), Double.parseDouble(jTFValor.getText()),(String) jComboBox1.getSelectedItem());
+                resp = cp.cadastrarProduto(jTFNome.getText(), Integer.parseInt(jTFQuantidade.getText()), Double.parseDouble(jTFValor.getText()),
+                    (String) jComboBox1.getSelectedItem());
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "Um dos campos possui valor inválido", "Erro", JOptionPane.ERROR_MESSAGE);
             }

@@ -176,6 +176,9 @@ public class TelaNovoProduto extends javax.swing.JFrame {
             }catch(Exception ex){
                 JOptionPane.showMessageDialog(null, "Quantidade ou valor com caracter errado");
             }
+            if (resp != 0) {
+                JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso");
+            }
         }
     }//GEN-LAST:event_jBCadastrarActionPerformed
 

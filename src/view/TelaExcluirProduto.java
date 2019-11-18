@@ -126,6 +126,9 @@ public class TelaExcluirProduto extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Erro ao excluir produto");
         } else {
             JOptionPane.showMessageDialog(null, "Produto deletado com sucesso");
+            TelaMenu tela = new TelaMenu();
+            this.setVisible(false);
+            tela.setVisible(true);
         }
     }//GEN-LAST:event_jBExcluirActionPerformed
 

@@ -121,6 +121,8 @@ public class TelaVenderProduto extends javax.swing.JFrame {
         if (verificarCampos()) {
             try {
                 cp.venderProduto(jTFNome.getText(), Integer.parseInt(jTFQuantidade.getText()));
+                jTFNome.setText("");
+                jTFQuantidade.setText("");
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "Quantidade diferente de numero", "Erro", JOptionPane.ERROR_MESSAGE);
             }
