@@ -161,12 +161,12 @@ public class TelaNovoProduto extends javax.swing.JFrame {
 
     private void jBCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarActionPerformed
         ControleProduto cp = new ControleProduto();
-        
+        int resp = 0;
         if(jTFNome.getText().equals("") || jTFQuantidade.getText().equals("") || jTFValor.getText().equals("")){
             JOptionPane.showMessageDialog(null, "Preencha todos os campos", "Erro", JOptionPane.ERROR_MESSAGE);
         }else{
             try{
-                cp.cadastrarProduto(jTFNome.getText(), Integer.parseInt(jTFQuantidade.getText()), Double.parseDouble(jTFValor.getText()),(String) jComboBox1.getSelectedItem());
+                resp = cp.cadastrarProduto(jTFNome.getText(), Integer.parseInt(jTFQuantidade.getText()), Double.parseDouble(jTFValor.getText()),(String) jComboBox1.getSelectedItem());
                 jTFNome.setText(null);
                 jTFQuantidade.setText(null);
                 jTFValor.setText(null);

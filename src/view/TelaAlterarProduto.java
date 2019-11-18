@@ -25,12 +25,14 @@ public class TelaAlterarProduto extends javax.swing.JFrame {
     }
 
     public TelaAlterarProduto(Produto p) {
+        ControleProduto cp = new ControleProduto();
         initComponents();
         try{
             jTFNome.setText(p.getNome());
             jTFQuantidade.setText(""+p.getQuantidade());
             jTFValor.setText(""+p.getValor());
             jComboBox1.setSelectedItem(p.getMesValidade());
+            cp.excluirProduto(p.getNome());
         }
         catch(Exception ex){
             
@@ -184,13 +186,22 @@ public class TelaAlterarProduto extends javax.swing.JFrame {
 
     private void jBAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAlterarActionPerformed
         ValidacaoController vc = new ValidacaoController();
+        TelaMenu tela = new TelaMenu();
         ControleProduto cp = new ControleProduto();
+        int resp = 0;
         if (vc.verificarCampos(jTFNome.getText(), jTFQuantidade.getText(), jTFValor.getText())) {
             try {
-                cp.alterarProduto(jTFNome.getText(), Integer.parseInt(jTFQuantidade.getText()), Double.parseDouble(jTFValor.getText()),(String) jComboBox1.getSelectedItem());
+                resp = cp.cadastrarProduto(jTFNome.getText(), Integer.parseInt(jTFQuantidade.getText()), Double.parseDouble(jTFValor.getText()),(String) jComboBox1.getSelectedItem());
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "Um dos campos possui valor inválido", "Erro", JOptionPane.ERROR_MESSAGE);
             }
+            if (resp > 0) {
+            JOptionPane.showMessageDialog(null, "alterado com sucesso");
+            this.setVisible(false);
+            tela.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "Erro ao alterar");
+            }   
         }
     }//GEN-LAST:event_jBAlterarActionPerformed
 

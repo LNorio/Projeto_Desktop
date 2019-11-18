@@ -31,34 +31,34 @@ public class ControleProduto {
         connection = bd.acessaBD();
     }
 
-    public void cadastrarProduto(String nome, int quantidade, double preco, String validade) throws ProdException {
+    public int cadastrarProduto(String nome, int quantidade, double preco, String validade) throws ProdException {
 
         int resp = 0;
-        try {
-            String sql = "Insert into produto (nome, quantidade, preco, validade)" + "values(?,?,?,?)";
+        Produto p = buscarProduto(nome);
+        if(p == null){
+            try {
+                String sql = "Insert into produto ( nome, quantidade, preco, validade)" + "values(?,?,?,?)";
 
-            pstdados = connection.prepareStatement(sql);
-
-            pstdados.setString(1, nome);
-            if (quantidade <= 0) { 
-                throw new ProdException("Quantidade menor igual a 0");
-            }else if(preco <= 0){
-                throw new ProdException("Preco menor igual a 0");
-            }else {
-                pstdados.setInt(2, quantidade);
-                pstdados.setDouble(3, preco);
+                pstdados = connection.prepareStatement(sql);
+                pstdados.setString(1, nome);
+                if (quantidade <= 0) { 
+                    throw new ProdException("Quantidade menor igual a 0");
+                }else if(preco <= 0){
+                    throw new ProdException("Preco menor igual a 0");
+                }else {
+                    pstdados.setInt(2, quantidade);
+                    pstdados.setDouble(3, preco);
+                }
+                pstdados.setString(4, validade);
+                resp = pstdados.executeUpdate();
+            } catch (SQLException ex) {
+                throw new ProdException("Erro no banco");
             }
-            pstdados.setString(4, validade);
-            resp = pstdados.executeUpdate();
-        } catch (SQLException ex) {
-            throw new ProdException("Nome ja existente");
         }
-
-        if (resp > 0) {
-            JOptionPane.showMessageDialog(null, "cadastro com sucesso");
-        } else {
-            JOptionPane.showMessageDialog(null, "Erro no cadastro");
+        else{
+            JOptionPane.showMessageDialog(null, "Nome ja existe", "Erro", JOptionPane.ERROR_MESSAGE);
         }
+        return resp;
     }
 
     public void venderProduto(String nome, int quantidade) {
@@ -86,31 +86,9 @@ public class ControleProduto {
         }
     }
 
-    public void alterarProduto(String nome, int quantidade, Double valor, String validade) throws Exception {
-
-        String sql = "UPDATE produto SET nome=?, quantidade=?, preco=?, validade=?  WHERE nome = '" + nome + "'";
-        try {
-            pstdados = connection.prepareStatement(sql);
-            pstdados.setString(1, nome);
-            if (quantidade <= 0 || valor <= 0) {
-                throw new Exception();
-            } else {
-                pstdados.setInt(2, quantidade);
-                pstdados.setDouble(3, valor);
-            }
-            pstdados.setString(4, validade);
-            pstdados.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Produto alterado com sucesso", "Mensagem", JOptionPane.PLAIN_MESSAGE);
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Erro =" + e);
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao alterar produto", "Erro", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
     public Produto buscarProduto(String nome) {
 
-        String sql = "Select * from produto where nome = '" + nome + "'";
+        String sql = "Select * from produto where nome = '" + nome + "';";
         try {
             stdados = connection.createStatement();
             rsdados = stdados.executeQuery(sql);
@@ -128,8 +106,9 @@ public class ControleProduto {
 
     }
 
-    public void excluirProduto(String nome) {
-
+    public int excluirProduto(String nome) {
+        
+        int resp = 0;
         try {
             Produto p = buscarProduto(nome);
 
@@ -139,22 +118,15 @@ public class ControleProduto {
                 String sql = "Delete from produto where nome = '" + p.getNome() + "'";
                 try {
                     pstdados = connection.prepareStatement(sql);
-                    int resp = pstdados.executeUpdate();
-                    if (resp == 0) {
-                        JOptionPane.showMessageDialog(null, "Erro ao excluir produto");
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Produto deletado com sucesso");
-                    }
+                    resp = pstdados.executeUpdate();
                 } catch (SQLException ex) {
                     JOptionPane.showMessageDialog(null, "Erro na query" + ex);
                 }
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao excluir produto");
+            JOptionPane.showMessageDialog(null, "Erro no banco");
         }
-
+        return resp;
     }
-
-    
 
 }

@@ -115,12 +115,17 @@ public class TelaExcluirProduto extends javax.swing.JFrame {
 
     private void jBExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExcluirActionPerformed
         ControleProduto cp = new ControleProduto();
-        
+        int resp = 0;
         try{
-            cp.excluirProduto(jTFNome.getText());
+            resp = cp.excluirProduto(jTFNome.getText());
         }
         catch(Exception ex){
             JOptionPane.showMessageDialog(null,"Erro ao Excluir");
+        }
+        if (resp == 0) {
+            JOptionPane.showMessageDialog(null, "Erro ao excluir produto");
+        } else {
+            JOptionPane.showMessageDialog(null, "Produto deletado com sucesso");
         }
     }//GEN-LAST:event_jBExcluirActionPerformed
 
